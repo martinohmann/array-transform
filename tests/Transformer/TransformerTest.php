@@ -25,6 +25,10 @@ class TransformerTest extends TestCase
         $this->mapping = Phake::mock(MappingInterface::class);
 
         $this->transformer = new Transformer($this->mapping);
+
+        Phake::when($this->mapping)
+            ->getKeySeparator()
+            ->thenReturn('.');
     }
 
     /**

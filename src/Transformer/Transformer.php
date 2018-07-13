@@ -45,14 +45,15 @@ class Transformer implements TransformerInterface
     private function doTransform(array $data, array $rules): array
     {
         $result = [];
+        $separator = $this->mapping->getKeySeparator();
 
-        $data = ArrayStructure::flatten($data);
+        $data = ArrayStructure::flatten($data, $separator);
 
         /** @var RuleInterface $rule */
         foreach ($rules as $rule) {
             $result[$rule->getTargetKey()] = $rule->resolve($data);
         }
 
-        return ArrayStructure::unflatten($result);
+        return ArrayStructure::unflatten($result, $separator);
     }
 }

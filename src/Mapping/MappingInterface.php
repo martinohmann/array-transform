@@ -15,4 +15,9 @@ interface MappingInterface
      * @return RuleInterface[]
      */
     public function getReverseRules(): array;
+
+    /**
+     * @return string
+     */
+    public function getKeySeparator(): string;
 }
