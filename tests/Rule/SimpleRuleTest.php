@@ -26,7 +26,7 @@ class SimpleRuleTest extends TestCase
     {
         $rule = new SimpleRule($sourceKey, $targetKey);
 
-        $this->assertSame($expected, $rule->resolve($data));
+        $this->assertSame($expected, $rule->resolveValue($data));
     }
 
     /**

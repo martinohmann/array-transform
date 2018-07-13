@@ -8,7 +8,7 @@ interface RuleInterface
      * @param array $data
      * @return mixed
      */
-    public function resolve(array $data);
+    public function resolveValue(array $data);
 
     /**
      * @return string

@@ -51,7 +51,7 @@ class Transformer implements TransformerInterface
 
         /** @var RuleInterface $rule */
         foreach ($rules as $rule) {
-            $result[$rule->getTargetKey()] = $rule->resolve($data);
+            $result[$rule->getTargetKey()] = $rule->resolveValue($data);
         }
 
         return ArrayStructure::unflatten($result, $separator);

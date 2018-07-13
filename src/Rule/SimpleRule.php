@@ -27,7 +27,7 @@ class SimpleRule implements RuleInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(array $data)
+    public function resolveValue(array $data)
     {
         return $data[$this->sourceKey] ?? null;
     }
