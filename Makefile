@@ -25,7 +25,7 @@ watch: ## Runs unit watcher
 
 .PHONY: metrics
 metrics: ## Collect metrics
-	${PHP} vendor/bin/phpmetrics --report-html=./metrics src
+	vendor/bin/phpmetrics --report-html=./.metrics src
 
 .PHONY: fmt
 fmt: ## Apply PSR2 code style
