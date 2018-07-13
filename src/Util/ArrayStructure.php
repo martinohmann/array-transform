@@ -14,7 +14,7 @@ class ArrayStructure
     {
         $result = [];
 
-        foreach ($array ?? [] as $key => $value) {
+        foreach ($array as $key => $value) {
             $keyPrefix = (empty($prefix) ? '' : $prefix.$separator).$key;
 
             if (!\is_array($value)) {
@@ -40,7 +40,7 @@ class ArrayStructure
         $result = [];
 
         foreach ($array as $key => $value) {
-            $keyParts = \explode($separator, $key);
+            $keyParts = (array) \explode($separator, $key);
             $arrRef = &$result;
 
             foreach ($keyParts as $keyPart) {
