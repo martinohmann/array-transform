@@ -37,7 +37,7 @@ class RuleFactory
         $rule = new SimpleRule($sourceKey->getName(), $targetKey->getName());
 
         if ($targetKey->hasType()) {
-            $rule = new TypeRule($rule, $targetKey->getType());
+            $rule = new TypeRule($rule, (string) $targetKey->getType());
         }
 
         return $rule;
