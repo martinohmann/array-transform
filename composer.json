@@ -20,13 +20,15 @@
         }
     },
     "require": {
-        "php": "^7.1"
+        "php": "^7.1",
+        "symfony/yaml": "^3.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.2",
+        "phpunit/phpunit": "^6.0",
         "spatie/phpunit-watcher": "^1.5",
         "phpstan/phpstan": "^0.10.1",
         "friendsofphp/php-cs-fixer": "^2.12",
-        "phpmetrics/phpmetrics": "^2.4"
+        "phpmetrics/phpmetrics": "^2.4",
+        "phake/phake": "^3.1"
     }
 }
