@@ -2,7 +2,7 @@
 
 namespace ArrayTransform\Key;
 
-class Key
+class TypedKey
 {
     /**
      * @var string

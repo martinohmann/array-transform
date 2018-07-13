@@ -4,6 +4,7 @@ namespace ArrayTransform\Tests\Key;
 
 use PHPUnit\Framework\TestCase;
 use ArrayTransform\Key\KeyParser;
+use ArrayTransform\Exception\ParseException;
 
 class KeyParserTest extends TestCase
 {
@@ -42,5 +43,14 @@ class KeyParserTest extends TestCase
 
         $this->assertSame('somekey', $parsed->getName());
         $this->assertFalse($parsed->hasType());
+    }
+
+    /**
+     * @test
+     */
+    public function itThrowsExceptionIfTypeIsInvalid()
+    {
+        $this->expectException(ParseException::class);
+        $this->parser->parseKey('foo[bar]');
     }
 }

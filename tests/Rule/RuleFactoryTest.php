@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use ArrayTransform\Rule\RuleFactory;
 use ArrayTransform\Exception\MappingException;
 use ArrayTransform\Rule\TypeRule;
+use ArrayTransform\Key\KeyParser;
 
 class RuleFactoryTest extends TestCase
 {
@@ -16,7 +17,7 @@ class RuleFactoryTest extends TestCase
 
     public function setUp()
     {
-        $this->factory = new RuleFactory();
+        $this->factory = new RuleFactory(new KeyParser());
     }
 
     /**
@@ -50,12 +51,8 @@ class RuleFactoryTest extends TestCase
     public function itCreatesTypeRuleFromConfig()
     {
         $config = [
-            'sourceKey' => 'foo',
-            'targetKey' => 'bar',
-            'types' => [
-                'sourceKey' => 'int',
-                'targetKey' => 'string',
-            ],
+            'sourceKey' => 'foo[string]',
+            'targetKey' => 'bar[int]',
         ];
 
         $rule = $this->factory->createRule($config);

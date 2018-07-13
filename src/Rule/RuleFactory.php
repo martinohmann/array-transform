@@ -3,9 +3,23 @@
 namespace ArrayTransform\Rule;
 
 use ArrayTransform\Exception\MappingException;
+use ArrayTransform\Key\KeyParser;
 
 class RuleFactory
 {
+    /**
+     * @var KeyParser
+     */
+    private $keyParser;
+
+    /**
+     * @param KeyParser $keyParser
+     */
+    public function __construct(KeyParser $keyParser)
+    {
+        $this->keyParser = $keyParser;
+    }
+
     /**
      * @param array $config
      * @return RuleInterface
@@ -17,10 +31,13 @@ class RuleFactory
             throw new MappingException('Rule config requires "sourceKey" and "targetKey" fields');
         }
 
-        $rule = new SimpleRule($config['sourceKey'], $config['targetKey']);
+        $sourceKey = $this->keyParser->parseKey($config['sourceKey']);
+        $targetKey = $this->keyParser->parseKey($config['targetKey']);
 
-        if (isset($config['types']['targetKey'])) {
-            $rule = new TypeRule($rule, $config['types']['targetKey']);
+        $rule = new SimpleRule($sourceKey->getName(), $targetKey->getName());
+
+        if ($targetKey->hasType()) {
+            $rule = new TypeRule($rule, $targetKey->getType());
         }
 
         return $rule;
