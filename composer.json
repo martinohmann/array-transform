@@ -1,0 +1,32 @@
+{
+    "name": "mohmann/array-transform",
+    "description": "Transforms raw arrays from a given source mapping and back again",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Ohmann",
+            "email": "martin@mohmann.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ArrayTransform\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ArrayTransform\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.2",
+        "spatie/phpunit-watcher": "^1.5",
+        "phpstan/phpstan": "^0.10.1",
+        "friendsofphp/php-cs-fixer": "^2.12",
+        "phpmetrics/phpmetrics": "^2.4"
+    }
+}

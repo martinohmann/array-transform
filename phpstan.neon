@@ -1,0 +1,5 @@
+parameters:
+    ignoreErrors: []
+
+    excludes_analyse: []
+
