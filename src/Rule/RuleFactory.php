@@ -4,6 +4,7 @@ namespace ArrayTransform\Rule;
 
 use ArrayTransform\Exception\MappingException;
 use ArrayTransform\Key\KeyParser;
+use ArrayTransform\Rule\RuleInterface;
 
 class RuleFactory
 {
@@ -36,8 +37,8 @@ class RuleFactory
 
         $rule = new SimpleRule($sourceKey->getName(), $targetKey->getName());
 
-        if ($targetKey->hasType()) {
-            $rule = new TypeRule($rule, (string) $targetKey->getType());
+        if ($sourceKey->hasType() || $targetKey->hasType()) {
+            $rule = new TypeRule($rule, (string) $sourceKey->getType(), (string) $targetKey->getType());
         }
 
         return $rule;

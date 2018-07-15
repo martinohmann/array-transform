@@ -10,18 +10,25 @@ class TypeRule implements RuleInterface
     private $rule;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $type;
+    private $sourceType;
+
+    /**
+     * @var string|null
+     */
+    private $targetType;
 
     /**
      * @param RuleInterface $rule
-     * @param string $type
+     * @param string|null $sourceType
+     * @param string|null $targetType
      */
-    public function __construct(RuleInterface $rule, string $type)
+    public function __construct(RuleInterface $rule, ?string $sourceType, ?string $targetType)
     {
         $this->rule = $rule;
-        $this->type = $type;
+        $this->sourceType = $sourceType;
+        $this->targetType = $targetType;
     }
 
     /**
@@ -51,12 +58,22 @@ class TypeRule implements RuleInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function reverse(): RuleInterface
+    {
+        return new static($this->rule->reverse(), $this->targetType, $this->sourceType);
+    }
+
+    /**
      * @param mixed $value
      * @return mixed
      */
     private function castValue($value)
     {
-        settype($value, $this->type);
+        if (!empty($this->sourceType)) {
+            settype($value, $this->sourceType);
+        }
 
         return $value;
     }

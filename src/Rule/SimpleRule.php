@@ -47,4 +47,12 @@ class SimpleRule implements RuleInterface
     {
         return $this->targetKey;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reverse(): RuleInterface
+    {
+        return new static($this->targetKey, $this->sourceKey);
+    }
 }

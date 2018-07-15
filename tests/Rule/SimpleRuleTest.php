@@ -20,6 +20,19 @@ class SimpleRuleTest extends TestCase
 
     /**
      * @test
+     */
+    public function itIsReversible()
+    {
+        $rule = new SimpleRule('foo', 'bar');
+        $reversed = $rule->reverse();
+
+        $this->assertSame('bar', $reversed->getSourceKey());
+        $this->assertSame('foo', $reversed->getTargetKey());
+        $this->assertSame('baz', $reversed->resolveValue(['bar' => 'baz']));
+    }
+
+    /**
+     * @test
      * @dataProvider getTestData
      */
     public function itResolvesValuesFromArray(string $sourceKey, string $targetKey, array $data, $expected)

@@ -19,4 +19,10 @@ interface RuleInterface
      * @return string
      */
     public function getTargetKey(): string;
+
+    /**
+     * @return RuleInterface
+     * @throws NotReversibleException
+     */
+    public function reverse(): RuleInterface;
 }
