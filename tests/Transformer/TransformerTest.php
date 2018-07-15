@@ -70,6 +70,7 @@ class TransformerTest extends TestCase
         Phake::when($this->mapping)
             ->getReverseRules()
             ->thenReturn([
+                new SimpleRule('mapped_to_empty_string', ''),
                 new SimpleRule('source', 'target'),
                 new SimpleRule('foo', 'bar'),
                 new SimpleRule('nested.key', 'not_nested'),
