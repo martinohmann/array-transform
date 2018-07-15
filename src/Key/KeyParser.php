@@ -7,6 +7,11 @@ use ArrayTransform\Exception\ParseException;
 class KeyParser
 {
     /**
+     * @const string
+     */
+    const TYPED_KEY_PATTERN = '#^(?P<key>.*)\[(?P<type>[a-z]+)\]$#';
+
+    /**
      * @const array
      */
     const VALID_TYPES = [
@@ -27,20 +32,18 @@ class KeyParser
      */
     public function parseKey(string $key): TypedKey
     {
-        if (\preg_match('#^(.*)\[([a-z]+)\]$#', $key, $matches)) {
-            $type = $matches[2];
-
-            if (!\in_array($type, self::VALID_TYPES)) {
+        if (\preg_match(self::TYPED_KEY_PATTERN, $key, $matches)) {
+            if (!\in_array($matches['type'], self::VALID_TYPES)) {
                 throw new ParseException(
                     \sprintf(
                         '"%s" is not a valid type, allowed types: "%s"',
-                        $type,
+                        $matches['type'],
                         implode('", "', self::VALID_TYPES)
                     )
                 );
             }
 
-            return new TypedKey($matches[1], $type);
+            return new TypedKey($matches['key'], $matches['type']);
         }
 
         return new TypedKey($key);
