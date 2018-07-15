@@ -2,6 +2,8 @@
 
 namespace ArrayTransform\Rule;
 
+use ArrayTransform\Exception\NotReversibleException;
+
 interface RuleInterface
 {
     /**
