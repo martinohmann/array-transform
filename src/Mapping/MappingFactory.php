@@ -75,11 +75,11 @@ class MappingFactory implements MappingFactoryInterface
     }
 
     /**
-     * @param MappingInterface $mapping
+     * @param Mapping $mapping
      * @param array $config
      * @return void
      */
-    private function applyGlobalConfig(MappingInterface $mapping, array $config)
+    private function applyGlobalConfig(Mapping $mapping, array $config)
     {
         if (isset($config['keySeparator'])) {
             $mapping->setKeySeparator((string) $config['keySeparator']);
