@@ -40,7 +40,12 @@ class ArrayStructure
         $result = [];
 
         foreach ($array as $key => $value) {
-            $keyParts = (array) \explode($separator, $key);
+            $keyParts = \explode($separator, $key);
+
+            if (!$keyParts) {
+                continue;
+            }
+
             $arrRef = &$result;
 
             foreach ($keyParts as $keyPart) {
