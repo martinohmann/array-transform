@@ -17,7 +17,8 @@ test: ## Runs unit tests
 
 .PHONY: cov
 cov: ## Runs unit tests with coverage
-	phpdbg -qrr vendor/bin/phpunit -c phpunit.coverage.xml
+	phpdbg -qrr vendor/bin/phpunit -c phpunit.coverage.xml \
+		--log-junit .coverage/phpunit.junit.xml --coverage-xml .coverage/coverage-xml
 	
 .PHONY: watch
 watch: ## Runs unit watcher
@@ -40,5 +41,5 @@ stan: ## Run phpstan with maximum checks
 	vendor/bin/phpstan analyse src --configuration phpstan.neon --level max
 
 .PHONY: inf
-inf: ## Throws infection into tests
-	phpdbg -qrr vendor/bin/infection --threads=$(nproc)
+inf: cov ## Throws infection into tests
+	phpdbg -qrr vendor/bin/infection --threads=$$(nproc) --coverage=.coverage --show-mutations
