@@ -1,0 +1,64 @@
+---
+array_transform:
+  # global configuration for the transformer
+  _global:
+    # the separator used in keys after the source array is flattened, e.g. a
+    # source array will be flattened as follows (using json structure for
+    # brevity):
+    #
+    # {
+    #   "some_key": {
+    #     "some_subkey": "some_value"
+    #   }
+    # }
+    #
+    # will be flattened to:
+    #
+    # {
+    #   "some_key.some_subkey": "some_value"
+    # }
+    #
+    # where the dot is the key separator. Default: '.'
+    key_separator: .
+
+  # the defaults will be used if a given field does not exist in the source
+  # and are applied to the source array before any transformation is done
+  _defaults:
+    direct:
+      somekey: 1
+    inverse:
+      some.key: 2
+
+  # result types can be enforces by specifying the type in brackets after
+  # the key name. if omitted, no type casts will be performed. type casts
+  # are performed as the last step of the transformation
+  somekey[int]:
+    # inverse defines the target key to map the direct key ("somekey") to
+    inverse: some.key[float]
+
+    # the value of the target key will be computed using a formula. formulas
+    # support basic math operations such as +,-,*,/ and can make use of
+    # parenthesis as well as variables. allowed variables are basically all
+    # existing keys of the source array
+    formula:
+      direct: some.key * 10
+      inverse: somekey / 10
+
+    # value mappings can be used to map certain source values to target values.
+    # please note that value mappings are ignored if formulas are defined.
+    value_mapping:
+      # defines the default target value if no mapping is defined for the
+      # source value
+      #   'set_null' (default) : the target will be null
+      #   'pass_through'       : just pass through the source value to the
+      #                          target
+      #   <array>              : if it is an array, it will be treated as
+      #                          a callable with the source value as first
+      #                          parameter, e.g.:
+      #                          [Some\Namespace\SomeClass, someFunc]
+      default: [Some\Namespace\SomeClass, resolveDefaultValue]
+      mapping:
+        - direct: 1
+          inverse: 2
+        - direct: 1
+          inverse: 2
