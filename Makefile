@@ -38,3 +38,7 @@ cs: ## Check PSR2 code style
 .PHONY: stan
 stan: ## Run phpstan with maximum checks
 	vendor/bin/phpstan analyse src --configuration phpstan.neon --level max
+
+.PHONY: inf
+inf: ## Throws infection into tests
+	phpdbg -qrr vendor/bin/infection --threads=$(nproc)

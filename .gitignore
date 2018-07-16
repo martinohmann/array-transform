@@ -2,3 +2,4 @@
 /.coverage/
 /.metrics/
 composer.lock
+infection-log.txt
