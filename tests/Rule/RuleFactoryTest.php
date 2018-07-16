@@ -239,6 +239,64 @@ class RuleFactoryTest extends TestCase
 
     /**
      * @test
+     * @dataProvider getValueMappingTestData
+     */
+    public function itThrowsExceptionIfValueMappingIsIncomplete(
+        array $mapping,
+        string $exceptionClass = MappingException::class
+    ) {
+        $config = [
+            'inverse' => 'bar',
+            'value_mapping' => [
+                'mapping' => $mapping,
+            ],
+        ];
+
+        $this->expectException($exceptionClass);
+        $this->factory->createRule('foo', $config);
+    }
+
+    /**
+     * @return array
+     */
+    public function getValueMappingTestData(): array
+    {
+        return [
+            'missing direct key' => [
+                [
+                    [
+                        'inverse' => 42,
+                    ],
+                ],
+            ],
+            'missing inverse key' => [
+                [
+                    [
+                        'direct' => 13,
+                    ],
+                ],
+            ],
+            'missing keys' => [
+                [
+                    [],
+                ],
+            ],
+            'partly valid mapping' => [
+                [
+                    [
+                        'direct' => 13,
+                        'inverse' => 42,
+                    ],
+                    [
+                        'direct' => 12,
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @test
      */
     public function formulaRuleTakesPrecedenceOverValueMappingRule()
     {

@@ -6,7 +6,7 @@ use ArrayTransform\Exception\MappingException;
 use ArrayTransform\Key\KeyParser;
 use ArrayTransform\Key\TypedKey;
 
-class RuleFactory
+class RuleFactory implements RuleFactoryInterface
 {
     /**
      * @var KeyParser
@@ -30,7 +30,7 @@ class RuleFactory
     public function createRule(string $directKey, array $config): RuleInterface
     {
         if (empty($directKey) && (!isset($config['inverse']) || empty($config['inverse']))) {
-            throw new MappingException('Direct and inverse key cannot be both empty at the same time.');
+            throw new MappingException('direct and inverse key cannot be both empty at the same time.');
         }
 
         $sourceKey = $this->keyParser->parseKey($directKey);
@@ -81,9 +81,11 @@ class RuleFactory
         $rule = new ValueMappingRule($rule, $config['default'] ?? null);
 
         foreach ($config['mapping'] as $values) {
-            if (\array_key_exists('direct', $values) && \array_key_exists('inverse', $values)) {
-                $rule->addValueMapping($values['direct'], $values['inverse']);
+            if (!\array_key_exists('direct', $values) || !\array_key_exists('inverse', $values)) {
+                throw new MappingException('direct and inverse key of value mapping must not be empty');
             }
+
+            $rule->addValueMapping($values['direct'], $values['inverse']);
         }
 
         return $rule;
