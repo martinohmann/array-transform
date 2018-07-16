@@ -22,7 +22,7 @@ class RuleFactory
     }
 
     /**
-     * @param string $sourceKey
+     * @param string $directKey
      * @param array $config
      * @return RuleInterface
      * @throws MappingException
