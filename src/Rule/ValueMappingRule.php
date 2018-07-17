@@ -95,13 +95,12 @@ class ValueMappingRule implements RuleInterface
     {
         $pos = \array_search($value, $this->sourceValues);
 
-        switch (true) {
-            case (false !== $pos):
-                return $this->targetValues[$pos];
-            case ($this->defaultStrategy == 'pass_through'):
-                return $value;
-            case (\is_callable($this->defaultStrategy)):
-                return \call_user_func($this->defaultStrategy, $value);
+        if (false !== $pos) {
+            return $this->targetValues[$pos];
+        } elseif ($this->defaultStrategy == 'pass_through') {
+            return $value;
+        } elseif (\is_callable($this->defaultStrategy)) {
+            return \call_user_func($this->defaultStrategy, $value);
         }
 
         return null;
