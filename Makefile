@@ -43,3 +43,7 @@ stan: ## Run phpstan with maximum checks
 .PHONY: inf
 inf: cov ## Throws infection into tests
 	phpdbg -qrr vendor/bin/infection --threads=$$(nproc) --coverage=.coverage --show-mutations
+
+.PHONY: bench
+bench: ## Run benchmarks using phpbench
+	vendor/bin/phpbench run benchmarks/

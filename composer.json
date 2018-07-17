@@ -16,7 +16,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ArrayTransform\\Tests\\": "tests/"
+            "ArrayTransform\\Tests\\": "tests/",
+            "ArrayTransform\\Benchmarks\\": "benchmarks/"
         }
     },
     "require": {
@@ -30,6 +31,7 @@
         "friendsofphp/php-cs-fixer": "^2.12",
         "phpmetrics/phpmetrics": "^2.4",
         "phake/phake": "^3.1",
-        "infection/infection": "^0.9.0"
+        "infection/infection": "^0.9.0",
+        "phpbench/phpbench": "^0.14.0"
     }
 }
