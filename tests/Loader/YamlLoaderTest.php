@@ -25,9 +25,7 @@ class YamlLoaderTest extends TestCase
     {
         $fixture = dirname(dirname(__FILE__)).'/fixtures/valid.yaml';
         $expected = [
-            'mapping' => [
-                'key' => 'value',
-            ],
+            'array_transform' => [],
         ];
 
         $this->assertSame($expected, $this->loader->load($fixture));
