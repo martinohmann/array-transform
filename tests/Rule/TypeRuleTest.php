@@ -30,7 +30,7 @@ class TypeRuleTest extends TestCase
 
         Phake::when($ruleMock)->resolveValue($data)->thenReturn(1);
 
-        $rule = new TypeRule($ruleMock, 'string', 'int');
+        $rule = new TypeRule($ruleMock, 'int', 'string');
 
         $this->assertSame('1', $rule->resolveValue($data));
     }
@@ -46,7 +46,7 @@ class TypeRuleTest extends TestCase
         Phake::when($ruleMock)->reverse()->thenReturn($ruleMock);
         Phake::when($ruleMock)->resolveValue($data)->thenReturn(1);
 
-        $rule = new TypeRule($ruleMock, 'int', 'string');
+        $rule = new TypeRule($ruleMock, 'string', 'int');
         $reversed = $rule->reverse();
 
         $this->assertSame('1', $reversed->resolveValue($data));
