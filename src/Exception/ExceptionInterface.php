@@ -2,6 +2,6 @@
 
 namespace ArrayTransform\Exception;
 
-class TransformException extends \Exception
+interface ExceptionInterface
 {
 }

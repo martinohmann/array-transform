@@ -2,8 +2,6 @@
 
 namespace ArrayTransform\Rule;
 
-use ArrayTransform\Exception\NotReversibleException;
-
 class SimpleFormulaRule implements RuleInterface
 {
     /**

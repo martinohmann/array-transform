@@ -2,6 +2,6 @@
 
 namespace ArrayTransform\Exception;
 
-class NotReversibleException extends TransformException
+class NotReversibleException extends \Exception implements ExceptionInterface
 {
 }

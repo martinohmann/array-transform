@@ -3,6 +3,7 @@
 namespace ArrayTransform\Mapping;
 
 use ArrayTransform\Rule\RuleInterface;
+use ArrayTransform\Exception\NotReversibleException;
 
 class Mapping implements MappingInterface
 {
@@ -47,7 +48,11 @@ class Mapping implements MappingInterface
     {
         if (empty($this->reverseRules)) {
             foreach ($this->rules as $rule) {
-                $this->reverseRules[] = $rule->reverse();
+                try {
+                    $this->reverseRules[] = $rule->reverse();
+                } catch (NotReversibleException $e) {
+                    /* ignored */
+                }
             }
         }
 

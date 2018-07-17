@@ -2,13 +2,14 @@
 
 namespace ArrayTransform\Loader;
 
-use ArrayTransform\Exception\TransformException;
+use ArrayTransform\Exception\ParseException;
 
 interface LoaderInterface
 {
     /**
      * @param string $fileName
      * @return array
+     * @throws ParseException
      */
     public function load(string $fileName): array;
 }
