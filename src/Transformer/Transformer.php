@@ -4,7 +4,7 @@ namespace ArrayTransform\Transformer;
 
 use ArrayTransform\Mapping\MappingInterface;
 use ArrayTransform\Rule\RuleInterface;
-use ArrayTransform\Util\ArrayStructure;
+use ArrayTransform\Util\ArrayUtil;
 
 class Transformer implements TransformerInterface
 {
@@ -47,7 +47,7 @@ class Transformer implements TransformerInterface
         $result = [];
         $separator = $this->mapping->getKeySeparator();
 
-        $data = ArrayStructure::flatten($data, $separator);
+        $data = ArrayUtil::flatten($data, $separator);
 
         /** @var RuleInterface $rule */
         foreach ($rules as $rule) {
@@ -56,6 +56,6 @@ class Transformer implements TransformerInterface
             }
         }
 
-        return ArrayStructure::unflatten($result, $separator);
+        return ArrayUtil::unflatten($result, $separator);
     }
 }

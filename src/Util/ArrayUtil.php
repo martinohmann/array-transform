@@ -2,7 +2,7 @@
 
 namespace ArrayTransform\Util;
 
-class ArrayStructure
+class ArrayUtil
 {
     /**
      * @param array $array
