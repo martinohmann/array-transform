@@ -1,2 +1,4 @@
 ---
-array_transform: []
+array_transform:
+  somekey:
+    inverse: someotherkey

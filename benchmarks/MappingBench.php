@@ -33,17 +33,17 @@ class MappingBench
     {
         return [
             [
-                'array_transform' => [],
+                'config' => [],
             ],
             [
-                'array_transform' => [
+                'config' => [
                     'foo[int]' => [
                         'inverse' => 'bar[string]',
                     ],
                 ],
             ],
             [
-                'array_transform' => [
+                'config' => [
                     '_global' => [
                         'keySeparator' => '.',
                     ],
@@ -58,7 +58,7 @@ class MappingBench
                 ],
             ],
             [
-                'array_transform' => [
+                'config' => [
                     '_global' => [
                         'keySeparator' => '.',
                     ],
@@ -85,8 +85,8 @@ class MappingBench
      * @Iterations(5)
      * @ParamProviders({"provideConfigs"})
      */
-    public function benchMappingFactory(array $config)
+    public function benchMappingFactory(array $params)
     {
-        $this->factory->createMapping($config);
+        $this->factory->createMapping($params['config']);
     }
 }

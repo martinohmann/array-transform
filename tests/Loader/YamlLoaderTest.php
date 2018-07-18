@@ -24,9 +24,7 @@ class YamlLoaderTest extends TestCase
     public function itLoadsValidYamlFileContentIntoArray()
     {
         $fixture = dirname(dirname(__FILE__)).'/fixtures/valid.yaml';
-        $expected = [
-            'array_transform' => [],
-        ];
+        $expected = ['somekey' => ['inverse' => 'someotherkey']];
 
         $this->assertSame($expected, $this->loader->load($fixture));
     }
@@ -34,9 +32,20 @@ class YamlLoaderTest extends TestCase
     /**
      * @test
      */
-    public function itThrowsParseExceptionIfFileContentsAreNotAnArryStructure()
+    public function itThrowsParseExceptionIfRootNotIsNotPresent()
     {
         $fixture = dirname(dirname(__FILE__)).'/fixtures/invalid.yaml';
+
+        $this->expectException(ParseException::class);
+        $this->loader->load($fixture);
+    }
+
+    /**
+     * @test
+     */
+    public function itThrowsParseExceptionIfRootNodeIsNotAnArray()
+    {
+        $fixture = dirname(dirname(__FILE__)).'/fixtures/invalid2.yaml';
 
         $this->expectException(ParseException::class);
         $this->loader->load($fixture);

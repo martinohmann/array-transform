@@ -26,27 +26,9 @@ class MappingFactory implements MappingFactoryInterface
      */
     public function createMapping(array $config): MappingInterface
     {
-        if (!isset($config['array_transform'])) {
-            throw new MappingException('config is missing the "array_transform" field');
-        }
-
-        if (!\is_array($config['array_transform'])) {
-            throw new MappingException('config field "array_transform" has to be an array');
-        }
-
         $mapping = new Mapping();
 
-        foreach ($config['array_transform'] as $key => $keyConfig) {
-            if ($key === '_global') {
-                $this->applyGlobalConfig($mapping, $keyConfig);
-                continue;
-            }
-
-            if ($key === '_defaults') {
-                // @TODO: implement me
-                continue;
-            }
-
+        foreach ($config as $key => $keyConfig) {
             if (!\is_string($key)) {
                 throw new MappingException(
                     \sprintf(
@@ -66,9 +48,11 @@ class MappingFactory implements MappingFactoryInterface
                 );
             }
 
-            $rule = $this->ruleFactory->createRule($key, $keyConfig);
-
-            $mapping->addRule($rule);
+            if ($key == '_global') {
+                $this->processGlobalConfig($mapping, $keyConfig);
+            } else {
+                $this->processRuleConfig($mapping, $key, $keyConfig);
+            }
         }
 
         return $mapping;
@@ -79,10 +63,23 @@ class MappingFactory implements MappingFactoryInterface
      * @param array $config
      * @return void
      */
-    private function applyGlobalConfig(Mapping $mapping, array $config)
+    private function processGlobalConfig(Mapping $mapping, array $config)
     {
         if (isset($config['keySeparator'])) {
             $mapping->setKeySeparator((string) $config['keySeparator']);
         }
+    }
+
+    /**
+     * @param Mapping $mapping
+     * @param string $key
+     * @param array $config
+     * @return void
+     */
+    private function processRuleConfig(Mapping $mapping, string $key, array $config)
+    {
+        $rule = $this->ruleFactory->createRule($key, $config);
+
+        $mapping->addRule($rule);
     }
 }

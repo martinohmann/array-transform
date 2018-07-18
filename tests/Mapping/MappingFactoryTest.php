@@ -36,26 +36,14 @@ class MappingFactoryTest extends TestCase
     public function getInvalidConfigTestData(): array
     {
         return [
-            'root node missing' => [
-                [],
-            ],
-            'root node not an array' => [
-                [
-                    'array_transform' => 'foo'
-                ],
-            ],
             'non-string keys' => [
                 [
-                    'array_transform' => [
-                        0 => [],
-                    ],
+                    0 => [],
                 ],
             ],
             'non-array key config' => [
                 [
-                    'array_transform' => [
-                        'foo' => 'bar',
-                    ],
+                    'foo' => 'bar',
                 ],
             ],
         ];
@@ -79,28 +67,22 @@ class MappingFactoryTest extends TestCase
     {
         return [
             'no key separator configured' => [
-                [
-                    'array_transform' => [],
-                ],
+                [],
                 '.',
             ],
             'key separator configured' => [
                 [
-                    'array_transform' => [
-                        '_global' => [
-                            'keySeparator' => '#',
-                        ]
-                    ],
+                    '_global' => [
+                        'keySeparator' => '#',
+                    ]
                 ],
                 '#',
             ],
             'numeric key separator configured' => [
                 [
-                    'array_transform' => [
-                        '_global' => [
-                            'keySeparator' => 123,
-                        ]
-                    ],
+                    '_global' => [
+                        'keySeparator' => 123,
+                    ]
                 ],
                 '123',
             ],
@@ -113,23 +95,20 @@ class MappingFactoryTest extends TestCase
     public function itCreatesMappingWithRules()
     {
         $config = [
-            'array_transform' => [
-                '_global' => [
-                    'keySeparator' => '.',
-                ],
-                '_defaults' => [],
-                'foo[int]' => [
-                    'inverse' => 'bar[string]',
-                ],
-                'bar' => [
-                    'inverse' => 'baz',
-                ],
-                'kilograms' => [
-                    'inverse' => 'grams',
-                    'formula' => [
-                        'direct' => 'grams / 1000',
-                        'inverse' => 'kilograms * 1000',
-                    ],
+            '_global' => [
+                'keySeparator' => '.',
+            ],
+            'foo[int]' => [
+                'inverse' => 'bar[string]',
+            ],
+            'bar' => [
+                'inverse' => 'baz',
+            ],
+            'kilograms' => [
+                'inverse' => 'grams',
+                'formula' => [
+                    'direct' => 'grams / 1000',
+                    'inverse' => 'kilograms * 1000',
                 ],
             ],
         ];

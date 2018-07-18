@@ -38,10 +38,14 @@ class RuleFactory implements RuleFactoryInterface
 
         $rule = $this->createSimpleRule($sourceKey, $targetKey);
 
+        if (isset($config['defaults']['direct']) || isset($config['defaults']['inverse'])) {
+            $rule = $this->createDefaultsRule($rule, $config['defaults']);
+        }
+
         if (isset($config['formula']['direct']) || isset($config['formula']['inverse'])) {
             $rule = $this->createFormulaRule($rule, $config['formula']);
         } elseif (isset($config['value_mapping']['mapping'])) {
-            $rule = $this->createValueMappingRule($rule, $config['value_mapping'] ?? []);
+            $rule = $this->createValueMappingRule($rule, $config['value_mapping']);
         }
 
         if ($sourceKey->hasType() || $targetKey->hasType()) {
@@ -59,6 +63,16 @@ class RuleFactory implements RuleFactoryInterface
     private function createSimpleRule(TypedKey $sourceKey, TypedKey $targetKey): RuleInterface
     {
         return new SimpleRule($sourceKey->getName(), $targetKey->getName());
+    }
+
+    /**
+     * @param RuleInterface $rule
+     * @param array $config
+     * @return RuleInterface
+     */
+    private function createDefaultsRule(RuleInterface $rule, array $config): RuleInterface
+    {
+        return new DefaultsRule($rule, $config['direct'] ?? null, $config['inverse'] ?? null);
     }
 
     /**
