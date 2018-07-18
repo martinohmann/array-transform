@@ -42,13 +42,9 @@ final class ArrayUtil
         foreach ($array as $key => $value) {
             $keyParts = \explode($separator, $key);
 
-            if (!$keyParts) {
-                continue;
-            }
-
             $arrRef = &$result;
 
-            foreach ($keyParts as $keyPart) {
+            foreach ($keyParts ?: [] as $keyPart) {
                 $arrRef = &$arrRef[$keyPart];
             }
 
