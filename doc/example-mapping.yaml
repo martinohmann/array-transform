@@ -30,7 +30,7 @@ array_transform:
 
     # the defaults will be used if a given field does not exist in the source
     # and are applied to the source array before any transformation is done.
-    # if not set, fields values will default to null
+    # if not set, missing fields values will default to null
     defaults:
       direct: 1
       inverse: 2

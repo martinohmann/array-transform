@@ -11,6 +11,7 @@ use ArrayTransform\Rule\RuleInterface;
 use ArrayTransform\Rule\SimpleRule;
 use ArrayTransform\Rule\SimpleFormulaRule;
 use ArrayTransform\Rule\ValueMappingRule;
+use ArrayTransform\Rule\DefaultsRule;
 
 class RuleFactoryTest extends TestCase
 {
@@ -96,6 +97,76 @@ class RuleFactoryTest extends TestCase
 
     /**
      * @test
+     * @dataProvider getDefaultsTestData
+     */
+    public function itCreatesDefaultsRuleWhenAtLeastOneDefaultIsDefined(
+        string $directKey,
+        array $config,
+        bool $notRuleType = false
+    ) {
+        $rule = $this->factory->createRule($directKey, $config);
+
+        if ($notRuleType) {
+            $this->assertNotInstanceOf(DefaultsRule::class, $rule);
+        } else {
+            $this->assertInstanceOf(DefaultsRule::class, $rule);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefaultsTestData(): array
+    {
+        return [
+            'direct default defined' => [
+                'foo',
+                [
+                    'inverse' => 'bar',
+                    'defaults' => [
+                        'direct' => 3,
+                    ],
+                ],
+            ],
+            'inverse default defined' => [
+                'foo',
+                [
+                    'inverse' => 'bar',
+                    'defaults' => [
+                        'inverse' => 'barbar',
+                    ],
+                ],
+            ],
+            'both defaults defined' => [
+                'foo',
+                [
+                    'inverse' => 'bar',
+                    'defaults' => [
+                        'direct' => true,
+                        'inverse' => 1.5,
+                    ],
+                ],
+            ],
+            'empty defaults config' => [
+                'foo',
+                [
+                    'inverse' => 'bar',
+                    'defaults' => [],
+                ],
+                true,
+            ],
+            'no defaults config' => [
+                'foo',
+                [
+                    'inverse' => 'bar',
+                ],
+                true,
+            ],
+        ];
+    }
+
+    /**
+     * @test
      * @dataProvider getTypesTestData
      */
     public function itCreatesTypeRuleWhenAtLeastOneOfTheKeysContainsAType(
@@ -146,7 +217,7 @@ class RuleFactoryTest extends TestCase
      * @test
      * @dataProvider getFormulasTestData
      */
-    public function itCreatesSimpleFormulaRuleWhenAtLeaseOneFormulaIsDefined(
+    public function itCreatesSimpleFormulaRuleWhenAtLeastOneFormulaIsDefined(
         string $directKey,
         array $config,
         bool $notRuleType = false
