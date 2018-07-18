@@ -24,16 +24,16 @@ class ValueMappingRule implements RuleInterface
     /**
      * @var mixed
      */
-    private $defaultStrategy;
+    private $defaultProvider;
 
     /**
      * @param RuleInterface $rule
-     * @param mixed $defaultStrategy
+     * @param mixed $defaultProvider
      */
-    public function __construct(RuleInterface $rule, $defaultStrategy = null)
+    public function __construct(RuleInterface $rule, $defaultProvider = null)
     {
         $this->rule = $rule;
-        $this->defaultStrategy = $defaultStrategy;
+        $this->defaultProvider = $defaultProvider;
     }
 
     /**
@@ -67,7 +67,7 @@ class ValueMappingRule implements RuleInterface
      */
     public function reverse(): RuleInterface
     {
-        $reverseRule = new static($this->rule->reverse(), $this->defaultStrategy);
+        $reverseRule = new static($this->rule->reverse(), $this->defaultProvider);
 
         foreach ($this->sourceValues as $i => $sourceValue) {
             $reverseRule->addValueMapping($this->targetValues[$i], $sourceValue);
@@ -97,10 +97,10 @@ class ValueMappingRule implements RuleInterface
 
         if (false !== $pos) {
             return $this->targetValues[$pos];
-        } elseif ($this->defaultStrategy == 'pass_through') {
+        } elseif ($this->defaultProvider == 'pass_through') {
             return $value;
-        } elseif (\is_callable($this->defaultStrategy)) {
-            return \call_user_func($this->defaultStrategy, $value);
+        } elseif (\is_callable($this->defaultProvider)) {
+            return \call_user_func($this->defaultProvider, $value);
         }
 
         return null;

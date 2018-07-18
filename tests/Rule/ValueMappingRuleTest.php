@@ -51,15 +51,15 @@ class ValueMappingRuleTest extends TestCase
 
     /**
      * @test
-     * @dataProvider getDefaultStrategyTestData
+     * @dataProvider getDefaultProviderTestData
      */
-    public function itHonorsStrategyToObtainDefaultValue($strategy, $sourceValue, $targetValue)
+    public function itHonorsProviderToObtainDefaultValue($provider, $sourceValue, $targetValue)
     {
         $ruleMock = Phake::mock(RuleInterface::class);
 
         Phake::when($ruleMock)->resolveValue->thenReturn($sourceValue);
 
-        $rule = new ValueMappingRule($ruleMock, $strategy);
+        $rule = new ValueMappingRule($ruleMock, $provider);
 
         $this->assertSame($targetValue, $rule->resolveValue([]));
     }
@@ -67,20 +67,18 @@ class ValueMappingRuleTest extends TestCase
     /**
      * @return array
      */
-    public function getDefaultStrategyTestData(): array
+    public function getDefaultProviderTestData(): array
     {
         $defaultFunc = function ($value) {
             return 2 * (int) $value;
         };
 
         return [
-            'set_null' => ['set_null', 2, null],
-            'set_null2' => [null, 'some string', null],
             'pass_through' => ['pass_through', 'some string', 'some string'],
             'callable array' => [[$this, 'resolveDefaultValue'], 'bar', 'string'],
             'callable static array' => [[self::class, 'staticResolveDefaultValue'], 'foo', '(string) foo'],
             'callable closure' => [$defaultFunc, '5', 10],
-            'strange strategy returns null by default' => ['weird strategy name', 'some string', null],
+            'strange provider returns null by default' => ['weird provider name', 'some string', null],
         ];
     }
 
