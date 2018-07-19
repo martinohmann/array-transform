@@ -1,5 +1,5 @@
 ---
-array_transform:
+mapping:
   # global configuration for the transformer
   _global:
     # the separator used in keys after the source array is flattened, e.g. a

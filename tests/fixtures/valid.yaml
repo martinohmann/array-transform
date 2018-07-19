@@ -1,4 +1,4 @@
 ---
-array_transform:
+mapping:
   somekey:
     inverse: someotherkey

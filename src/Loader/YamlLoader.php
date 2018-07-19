@@ -10,7 +10,7 @@ class YamlLoader implements LoaderInterface
     /**
      * @const string
      */
-    const ROOT_NODE = 'array_transform';
+    const ROOT_NODE = 'mapping';
 
     /**
      * {@inheritdoc}

@@ -5,20 +5,39 @@ namespace ArrayTransform\Mapping;
 use ArrayTransform\Rule\RuleFactoryInterface;
 use ArrayTransform\Rule\RuleFactory;
 use ArrayTransform\Exception\MappingException;
+use ArrayTransform\Loader\LoaderInterface;
+use ArrayTransform\Loader\YamlLoader;
 
 class MappingFactory implements MappingFactoryInterface
 {
+    /**
+     * @var LoaderInterface
+     */
+    private $loader;
+
     /**
      * @var RuleFactoryInterface
      */
     private $ruleFactory;
 
     /**
+     * @param LoaderInterface $loader
      * @param RuleFactoryInterface $ruleFactory
      */
-    public function __construct(RuleFactoryInterface $ruleFactory = null)
+    public function __construct(LoaderInterface $loader = null, RuleFactoryInterface $ruleFactory = null)
     {
+        $this->loader = $loader ?? new YamlLoader();
         $this->ruleFactory = $ruleFactory ?? new RuleFactory();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createMappingFromFile(string $fileName): MappingInterface
+    {
+        $config = $this->loader->load($fileName);
+
+        return $this->createMapping($config);
     }
 
     /**

@@ -117,4 +117,16 @@ class MappingFactoryTest extends TestCase
 
         $this->assertCount(3, $mapping->getRules());
     }
+
+    /**
+     * @test
+     */
+    public function itCreatesMappingFromFile()
+    {
+        $fixture = dirname(dirname(__FILE__)).'/fixtures/valid.yaml';
+
+        $mapping = $this->factory->createMappingFromFile($fixture);
+
+        $this->assertCount(1, $mapping->getRules());
+    }
 }
