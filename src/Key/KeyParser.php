@@ -38,7 +38,7 @@ class KeyParser
                     \sprintf(
                         '"%s" is not a valid type, allowed types: "%s"',
                         $matches['type'],
-                        implode('", "', self::VALID_TYPES)
+                        \implode('", "', self::VALID_TYPES)
                     )
                 );
             }

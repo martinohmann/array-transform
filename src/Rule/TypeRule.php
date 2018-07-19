@@ -72,7 +72,7 @@ class TypeRule implements RuleInterface
     private function castValue($value)
     {
         if (!empty($this->targetType)) {
-            settype($value, $this->targetType);
+            \settype($value, $this->targetType);
         }
 
         return $value;
