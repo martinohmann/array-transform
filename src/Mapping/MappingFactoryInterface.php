@@ -11,6 +11,7 @@ interface MappingFactoryInterface
      * @param array $config
      * @return MappingInterface
      * @throws MappingException
+     * @throws ParseException
      */
     public function createMapping(array $config): MappingInterface;
 
