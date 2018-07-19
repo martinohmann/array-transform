@@ -38,8 +38,8 @@ class RuleFactoryTest extends TestCase
 
         $rule = $this->factory->createRule($directKey, $config);
 
-        $this->assertSame($directKey, $rule->getSourceKey());
-        $this->assertSame($config['inverse'], $rule->getTargetKey());
+        $this->assertSame($config['inverse'], $rule->getSourceKey());
+        $this->assertSame($directKey, $rule->getTargetKey());
     }
 
     /**
@@ -305,7 +305,7 @@ class RuleFactoryTest extends TestCase
 
         $this->assertInstanceOf(ValueMappingRule::class, $rule);
 
-        $this->assertSame(42, $rule->resolveValue(['foo' => 13]));
+        $this->assertSame(13, $rule->resolveValue(['bar' => 42]));
     }
 
     /**

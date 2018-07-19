@@ -33,8 +33,8 @@ class RuleFactory implements RuleFactoryInterface
             throw new MappingException('direct and inverse key cannot be both empty at the same time.');
         }
 
-        $sourceKey = $this->keyParser->parseKey($directKey);
-        $targetKey = $this->keyParser->parseKey($config['inverse'] ?? '');
+        $targetKey = $this->keyParser->parseKey($directKey);
+        $sourceKey = $this->keyParser->parseKey($config['inverse'] ?? '');
 
         $rule = $this->createSimpleRule($sourceKey, $targetKey);
 
@@ -72,7 +72,7 @@ class RuleFactory implements RuleFactoryInterface
      */
     private function createDefaultsRule(RuleInterface $rule, array $config): RuleInterface
     {
-        return new DefaultsRule($rule, $config['direct'] ?? null, $config['inverse'] ?? null);
+        return new DefaultsRule($rule, $config['inverse'] ?? null, $config['direct'] ?? null);
     }
 
     /**
@@ -82,7 +82,7 @@ class RuleFactory implements RuleFactoryInterface
      */
     private function createFormulaRule(RuleInterface $rule, array $config): RuleInterface
     {
-        return new SimpleFormulaRule($rule, $config['direct'] ?? '', $config['inverse'] ?? '');
+        return new SimpleFormulaRule($rule, $config['inverse'] ?? '', $config['direct'] ?? '');
     }
 
     /**
@@ -99,7 +99,7 @@ class RuleFactory implements RuleFactoryInterface
                 throw new MappingException('direct and inverse key of value mapping must not be empty');
             }
 
-            $rule->addValueMapping($values['direct'], $values['inverse']);
+            $rule->addValueMapping($values['inverse'], $values['direct']);
         }
 
         return $rule;
