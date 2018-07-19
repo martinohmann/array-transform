@@ -8,9 +8,17 @@ use ArrayTransform\Exception\ParseException;
 class YamlLoader implements LoaderInterface
 {
     /**
-     * @const string
+     * @var string
      */
-    const ROOT_NODE = 'mapping';
+    private $rootNode;
+
+    /**
+     * @param string $rootNode
+     */
+    public function __construct(string $rootNode = 'mapping')
+    {
+        $this->rootNode = $rootNode;
+    }
 
     /**
      * {@inheritdoc}
@@ -19,25 +27,25 @@ class YamlLoader implements LoaderInterface
     {
         $data = Yaml::parseFile($fileName);
 
-        if (!isset($data[self::ROOT_NODE])) {
+        if (!isset($data[$this->rootNode])) {
             throw new ParseException(
                 \sprintf(
                     'root node "%s" not found',
-                    self::ROOT_NODE
+                    $this->rootNode
                 )
             );
         }
 
-        if (!\is_array($data[self::ROOT_NODE])) {
+        if (!\is_array($data[$this->rootNode])) {
             throw new ParseException(
                 \sprintf(
                     'expected root node "%s" to be of type "array", found "%s"',
-                    self::ROOT_NODE,
-                    gettype($data[self::ROOT_NODE])
+                    $this->rootNode,
+                    \gettype($data[$this->rootNode])
                 )
             );
         }
 
-        return $data[self::ROOT_NODE];
+        return $data[$this->rootNode];
     }
 }
