@@ -77,6 +77,36 @@ class MappingBench
                     ],
                 ],
             ],
+            [
+                'config' => [
+                    '_global' => [
+                        'keySeparator' => '.',
+                    ],
+                    '_defaults' => [],
+                    'foo[string]' => [
+                        'inverse' => 'bar[string]',
+                        'value_mapping' => [
+                            'behaviour' => 'pass_through',
+                            'mapping' => [
+                                [
+                                    'direct' => 'A',
+                                    'inverse' => 'b'
+                                ],
+                            ],
+                        ],
+                    ],
+                    'bar[float]' => [
+                        'inverse' => 'foo.baz[float]',
+                        'formula' => [
+                            'direct' => 'foo.baz * 1000',
+                            'inverse' => 'bar / 1000',
+                        ],
+                    ],
+                    'some.key[string]' => [
+                        'inverse' => 'some_key[string]',
+                    ],
+                ],
+            ],
         ];
     }
 
