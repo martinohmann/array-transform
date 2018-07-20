@@ -11,7 +11,25 @@ Transforms raw arrays from a given source mapping and back again
 Installation
 ------------
 
-Work in progress.
+This package requires PHP 7.1 or higher.
+
+Work in progress. Available via packagist soon.
+
+Usage
+-----
+
+WIP. Check the `examples/` directory for now.
+
+Development / Testing
+---------------------
+
+Refer to the Makefile for helpful commands, e.g.:
+
+```
+make stan
+make test
+make inf
+```
 
 License
 -------
