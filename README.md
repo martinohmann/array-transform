@@ -1,6 +1,8 @@
 array-transform
 ===============
 
+[![Build Status](https://travis-ci.org/martinohmann/array-transform.svg?branch=master)](https://travis-ci.org/martinohmann/array-transform)
+
 Transforms raw arrays from a given source mapping and back again
 
 Installation
