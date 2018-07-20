@@ -24,7 +24,9 @@ before_script:
   - travis_retry composer update $PREFER_LOWEST
 
 script:
-  - phpdbg -qrr vendor/bin/phpunit -c phpunit.coverage.xml --coverage-clover build/logs/clover.xml
+  - vendor/bin/phpstan analyse src --configuration phpstan.neon --level max
+  - phpdbg -qrr vendor/bin/phpunit -c phpunit.coverage.xml --log-junit .coverage/phpunit.junit.xml --coverage-xml .coverage/coverage-xml --coverage-clover build/logs/clover.xml
+  - phpdbg -qrr vendor/bin/infection --coverage=.coverage --show-mutations --verbose
 
 after_success:
   - travis_retry php coveralls.phar -v
