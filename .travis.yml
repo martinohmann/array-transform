@@ -13,14 +13,21 @@ php:
   - 7.1
   - 7.2
 
+install:
+  - wget -c -nc --retry-connrefused --tries=0 https://github.com/php-coveralls/php-coveralls/releases/download/v2.0.0/php-coveralls.phar -O coveralls.phar
+  - chmod +x coveralls.phar
+  - php coveralls.phar --version
+
 before_script:
+  - mkdir -p build/logs
   - travis_retry composer self-update
   - travis_retry composer update $PREFER_LOWEST
 
-script: phpdbg -qrr vendor/bin/phpunit -c phpunit.coverage.xml
+script:
+  - phpdbg -qrr vendor/bin/phpunit -c phpunit.coverage.xml --coverage-clover build/logs/clover.xml
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - travis_retry php coveralls.phar -v
 
 notifications:
   email: false
