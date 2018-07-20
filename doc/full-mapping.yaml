@@ -1,0 +1,84 @@
+---
+mapping:
+  # global configuration for the transformer
+  _global:
+    # the separator used in keys after the source array is flattened, e.g. a
+    # source array will be flattened as follows (using json structure for
+    # brevity):
+    #
+    # {
+    #   "some_key": {
+    #     "some_subkey": "some_value"
+    #   }
+    # }
+    #
+    # will be flattened to:
+    #
+    # {
+    #   "some_key.some_subkey": "some_value"
+    # }
+    #
+    # where the dot is the key separator. Default: '.'
+    key_separator: .
+
+  # minimal mapping that just maps the keys foo and bar
+  foo:
+    # inverse defines the target key to map the direct key ("foo") to
+    inverse: bar
+
+  # minimal mapping that maps the keys foo and bar and defines default
+  # values
+  bar:
+    # inverse defines the target key to map the direct key ("baz") to
+    inverse: baz
+
+    # the defaults will be used if a given field does not exist in the source
+    # and are applied to the source array before any transformation is done.
+    # if not set, missing fields values will default to null
+    defaults:
+      direct: 1
+      inverse: 2
+
+  # result types can be enforces by specifying the type in brackets after
+  # the key name. if omitted, no type casts will be performed. type casts
+  # are performed as the last step of the transformation
+  grams[int]:
+    # inverse defines the target key to map the direct key ("grams") to
+    inverse: weight.kilograms[float]
+
+    # the value of the target key will be computed using a formula. formulas
+    # support basic math operations such as +,-,*,/ and can make use of
+    # parenthesis as well as variables. allowed variables are basically all
+    # existing keys of the source array
+    formula:
+      direct: weight.kilograms * 1000
+      inverse: grams / 1000
+
+  # result types can be enforces by specifying the type in brackets after
+  # the key name. if omitted, no type casts will be performed. type casts
+  # are performed as the last step of the transformation
+  american.grades[string]:
+    # inverse defines the target key to map the direct key ("american.grades")
+    # to
+    inverse: german.grades[float]
+
+    # value mappings can be used to map certain source values to target values.
+    # please note that value mappings are ignored if formulas are defined.
+    value_mapping:
+      # defines the default target value if no mapping is defined for the
+      # source value. if omitted, the default is to return null.
+      #   'pass_through' : just pass through the source value to the target
+      #   a callable     : the return value of the callable is used. the
+      #                    callable receives the source value as the first
+      #                    parameter. example:
+      #                    [Some\Namespace\SomeClass, someFunc]
+      default: [Some\Namespace\SomeClass, resolveDefaultValue]
+      mapping:
+        - direct: A+
+          inverse: 1.0
+        - direct: A
+          inverse: 1.3
+        - direct: A-
+          inverse: 1.7
+        - direct: B+
+          inverse: 2.0

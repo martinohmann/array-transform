@@ -23,10 +23,9 @@ class YamlLoaderTest extends TestCase
      */
     public function itLoadsValidYamlFileContentIntoArray()
     {
-        $fixture = dirname(dirname(__FILE__)).'/fixtures/valid.yaml';
         $expected = ['somekey' => ['inverse' => 'someotherkey']];
 
-        $this->assertSame($expected, $this->loader->load($fixture));
+        $this->assertSame($expected, $this->loader->load($this->getFixture('valid.yaml')));
     }
 
     /**
@@ -34,10 +33,8 @@ class YamlLoaderTest extends TestCase
      */
     public function itThrowsParseExceptionIfRootNotIsNotPresent()
     {
-        $fixture = dirname(dirname(__FILE__)).'/fixtures/invalid.yaml';
-
         $this->expectException(ParseException::class);
-        $this->loader->load($fixture);
+        $this->loader->load($this->getFixture('invalid.yaml'));
     }
 
     /**
@@ -45,9 +42,20 @@ class YamlLoaderTest extends TestCase
      */
     public function itThrowsParseExceptionIfRootNodeIsNotAnArray()
     {
-        $fixture = dirname(dirname(__FILE__)).'/fixtures/invalid2.yaml';
-
         $this->expectException(ParseException::class);
-        $this->loader->load($fixture);
+        $this->loader->load($this->getFixture('invalid2.yaml'));
+    }
+
+    /**
+     * @param string $fileName
+     * @return string
+     */
+    private function getFixture(string $fileName): string
+    {
+        return \sprintf(
+            '%s/Fixtures/%s',
+            \dirname(\dirname(__FILE__)),
+            $fileName
+        );
     }
 }

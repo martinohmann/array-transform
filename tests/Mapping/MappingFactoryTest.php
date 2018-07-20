@@ -123,10 +123,21 @@ class MappingFactoryTest extends TestCase
      */
     public function itCreatesMappingFromFile()
     {
-        $fixture = dirname(dirname(__FILE__)).'/fixtures/valid.yaml';
-
-        $mapping = $this->factory->createMappingFromFile($fixture);
+        $mapping = $this->factory->createMappingFromFile($this->getFixture('valid.yaml'));
 
         $this->assertCount(1, $mapping->getRules());
+    }
+
+    /**
+     * @param string $fileName
+     * @return string
+     */
+    private function getFixture(string $fileName): string
+    {
+        return \sprintf(
+            '%s/Fixtures/%s',
+            \dirname(\dirname(__FILE__)),
+            $fileName
+        );
     }
 }
