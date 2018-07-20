@@ -7,6 +7,10 @@ use Phake;
 use ArrayTransform\Transformer\Transformer;
 use ArrayTransform\Mapping\MappingInterface;
 use ArrayTransform\Rule\SimpleRule;
+use ArrayTransform\Rule\TypeRule;
+use ArrayTransform\Rule\SimpleFormulaRule;
+use ArrayTransform\Rule\DefaultsRule;
+use ArrayTransform\Rule\ValueMappingRule;
 
 class TransformerTest extends TestCase
 {
@@ -65,6 +69,50 @@ class TransformerTest extends TestCase
     /**
      * @test
      */
+    public function itTransformsComplexMapping()
+    {
+        $valueMappingRule = new ValueMappingRule(new SimpleRule('foo', 'bar'));
+        $valueMappingRule->addValueMapping('asdf', 'fdsa');
+
+        Phake::when($this->mapping)
+            ->getRules()
+            ->thenReturn([
+                new TypeRule(
+                    new SimpleFormulaRule(
+                        new SimpleRule('nested.key', 'not_nested'),
+                        '(not_nested * 2) - 1',
+                        '(nested.key + 1) / 2'
+                    ),
+                    'int',
+                    'float'
+                ),
+                new DefaultsRule(
+                    new SimpleRule('key', 'other_key'),
+                    'key_default',
+                    'other_key_default'
+                ),
+                $valueMappingRule
+            ]);
+
+        $given = [
+            'nested' => [
+                'key' => 3,
+            ],
+            'foo' => 'asdf',
+        ];
+
+        $expected = [
+            'not_nested' => 2.0,
+            'other_key' => 'key_default',
+            'bar' => 'fdsa',
+        ];
+
+        $this->assertSame($expected, $this->transformer->transform($given));
+    }
+
+    /**
+     * @test
+     */
     public function itReverseTransformsSimpleMapping()
     {
         Phake::when($this->mapping)
@@ -89,6 +137,50 @@ class TransformerTest extends TestCase
             'target' => 1,
             'bar' => 'baz',
             'not_nested' => 'value',
+        ];
+
+        $this->assertSame($expected, $this->transformer->reverseTransform($given));
+    }
+
+    /**
+     * @test
+     */
+    public function itReverseTransformsComplexMapping()
+    {
+        $valueMappingRule = new ValueMappingRule(new SimpleRule('foo', 'bar'));
+        $valueMappingRule->addValueMapping('asdf', 'fdsa');
+
+        Phake::when($this->mapping)
+            ->getReverseRules()
+            ->thenReturn([
+                (new TypeRule(
+                    new SimpleFormulaRule(
+                        new SimpleRule('nested.key', 'not_nested'),
+                        '(not_nested * 2) - 1',
+                        '(nested.key + 1) / 2'
+                    ),
+                    'int',
+                    'float'
+                ))->reverse(),
+                (new DefaultsRule(
+                    new SimpleRule('key', 'other_key'),
+                    'key_default',
+                    'other_key_default'
+                ))->reverse(),
+                $valueMappingRule->reverse()
+            ]);
+
+        $given = [
+            'not_nested' => 2.0,
+            'bar' => 'fdsa',
+        ];
+
+        $expected = [
+            'nested' => [
+                'key' => 3,
+            ],
+            'key' => 'other_key_default',
+            'foo' => 'asdf',
         ];
 
         $this->assertSame($expected, $this->transformer->reverseTransform($given));
