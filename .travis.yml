@@ -1,0 +1,37 @@
+language: php
+
+git:
+  depth: 3
+  submodules: false
+
+matrix:
+  fast_finish: true
+
+sudo: false
+
+php:
+  - 7.1
+  - 7.2
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer update $PREFER_LOWEST
+
+script: phpunit --coverage-text
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+env:
+  matrix:
+    - PREFER_LOWEST="--prefer-lowest --prefer-stable"
+    - PREFER_LOWEST=""
+  global:
+    secure:
