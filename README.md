@@ -30,14 +30,25 @@ A php array that looks like this (1):
 ];
 ```
 
-... transforms to this (2):
+... transforms to this (2) (`reverseTransform`):
 ```
 [
     'foo' => 1;
 ];
 ```
 
-The above array (2) can be transformed back to match the orignal (1). Simple formulas and type definitions are some of the "advanced" features of array-transform. Please refer to the documentation for more details.
+... and can be transformed back to its original form (`reverseTransform`)*
+```
+[
+    'bar' [
+        'baz' => 1000.0
+    ],
+];
+```
+
+Simple formulas and type definitions are some of the "advanced" features of array-transform. Please refer to the documentation for more details.
+
+*There are weird mapping cases where a `reverseTransform` is not possible. Refer to the documentation for details.
 
 Installation
 ------------
