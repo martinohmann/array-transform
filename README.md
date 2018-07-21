@@ -6,9 +6,38 @@ array-transform
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![PHP 7 ready](http://php7ready.timesplinter.ch/martinohmann/array-transform/badge.svg)](https://travis-ci.org/martinohmann/arry-transform)
 
-Transforms raw arrays from a given source mapping and back again
+Transforms raw arrays from a given source mapping to a target mapping and back again.
 
 This package requires **PHP 7.1 or higher**.
+
+Quick example. Given the following YAML mapping:
+```
+---
+mapping:
+  foo[int]:
+    inverse: bar.baz[float]
+    formula:
+      direct: bar.baz / 1000
+      inverse: foo * 1000
+```
+
+A php array that looks like this (1):
+```
+[
+    'bar' [
+        'baz' => 1000.0
+    ],
+];
+```
+
+... transforms to this (2):
+```
+[
+    'foo' => 1;
+];
+```
+
+The above array (2) can be transformed back to match the orignal (1). Simple formulas and type definitions are some of the "advanced" features of array-transform. Please refer to the documentation for more details.
 
 Installation
 ------------
