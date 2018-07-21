@@ -20,6 +20,11 @@ Usage
 
 WIP. Check the `examples/` directory for now.
 
+Documentation
+-------------
+
+WIP. Check the `doc/` directory for a [mapping example](doc/full-mapping.yaml).
+
 Development / Testing
 ---------------------
 
