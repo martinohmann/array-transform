@@ -8,12 +8,16 @@ array-transform
 
 Transforms raw arrays from a given source mapping and back again
 
+This package requires **PHP 7.1 or higher**.
+
 Installation
 ------------
 
-This package requires **PHP 7.1 or higher**.
+Via composer:
 
-Work in progress. Available via packagist soon.
+```
+composer require mohmann/array-transform
+```
 
 Usage
 -----
