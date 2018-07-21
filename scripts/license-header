@@ -1,0 +1,10 @@
+#!/bin/bash
+
+while read -r file; do
+  firstLine=$(sed -n 1,1p "$file")
+  secondLine=$(sed -n 2,2p "$file")
+
+  if ! echo "$secondLine" | grep -q '^/\*'; then
+    sed -i '/'"$firstLine"'/r .licence-header' "$file"
+  fi
+done < <(find . -path ./vendor -prune -o -name '*.php' -print)

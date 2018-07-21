@@ -1,7 +1,0 @@
-#!/bin/bash
-
-search=(src tests benchmarks)
-
-while read -r file; do
-  echo "$file"
-done < <(find "${search[@]}" -name '*.php')
