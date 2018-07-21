@@ -4,7 +4,7 @@ array-transform
 [![Build Status](https://travis-ci.org/martinohmann/array-transform.svg?branch=master)](https://travis-ci.org/martinohmann/array-transform)
 [![Coverage Status](https://coveralls.io/repos/github/martinohmann/array-transform/badge.svg)](https://coveralls.io/github/martinohmann/array-transform)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![PHP 7 ready](http://php7ready.timesplinter.ch/martinohmann/array-transform/badge.svg)](https://travis-ci.org/martinohmann/arry-transform)
+[![PHP 7.1+](https://img.shields.io/badge/php-7.1%2B-blue.svg)](https://packagist.org/packages/mohmann/array-transform)
 
 Transforms raw arrays from a given source mapping to a target mapping and back again.
 
