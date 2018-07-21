@@ -30,7 +30,7 @@ A php array that looks like this (1):
 ];
 ```
 
-... transforms to this (2) (`reverseTransform`):
+... transforms to this (2) (`transform`):
 ```
 [
     'foo' => 1;
