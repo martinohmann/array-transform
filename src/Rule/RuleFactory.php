@@ -60,6 +60,10 @@ class RuleFactory implements RuleFactoryInterface
             $rule = $this->createTypeRule($rule, $sourceKey, $targetKey);
         }
 
+        if (isset($config['not_null']['direct']) || isset($config['not_null']['inverse'])) {
+            $rule = $this->createNotNullRule($rule, $config['not_null']);
+        }
+
         return $rule;
     }
 
@@ -122,5 +126,18 @@ class RuleFactory implements RuleFactoryInterface
     private function createTypeRule(RuleInterface $rule, TypedKey $sourceKey, TypedKey $targetKey): RuleInterface
     {
         return new TypeRule($rule, $sourceKey->getType(), $targetKey->getType());
+    }
+
+    /**
+     * @param RuleInterface $rule
+     * @param array $config
+     * @return RuleInterface
+     */
+    private function createNotNullRule(RuleInterface $rule, array $config): RuleInterface
+    {
+        $sourceNotNull = isset($config['direct']) ? (bool) $config['direct'] : false;
+        $targetNotNull = isset($config['inverse']) ? (bool) $config['inverse'] : false;
+
+        return new NotNullRule($rule, $sourceNotNull, $targetNotNull);
     }
 }

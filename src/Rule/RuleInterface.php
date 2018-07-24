@@ -10,6 +10,7 @@
 
 namespace ArrayTransform\Rule;
 
+use ArrayTransform\Exception\NotNullableException;
 use ArrayTransform\Exception\NotReversibleException;
 
 interface RuleInterface
@@ -17,6 +18,7 @@ interface RuleInterface
     /**
      * @param array $data
      * @return mixed
+     * @throws NotNullableException
      */
     public function resolveValue(array $data);
 

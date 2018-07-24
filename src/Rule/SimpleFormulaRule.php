@@ -60,22 +60,22 @@ class SimpleFormulaRule implements RuleInterface
      */
     public function resolveValue(array $data)
     {
-        $fallback = $this->rule->resolveValue($data);
+        $fallback = null;
 
         if (empty($this->targetFormula)) {
-            return $fallback;
+            return null;
         }
 
         $formula = $this->resolveVariables($data, $this->targetFormula);
 
         if (\preg_match('#[^\d\/\*\-\+\s\.\)\(]+#', $formula)) {
-            return $fallback;
+            return null;
         }
 
         try {
             $result = eval(\sprintf('return (%s);', $formula));
         } catch (\ParseError $e) {
-            $result = $fallback;
+            $result = null;
         }
 
         return $result;

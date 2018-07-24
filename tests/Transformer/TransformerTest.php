@@ -19,6 +19,7 @@ use ArrayTransform\Rule\TypeRule;
 use ArrayTransform\Rule\SimpleFormulaRule;
 use ArrayTransform\Rule\DefaultsRule;
 use ArrayTransform\Rule\ValueMappingRule;
+use ArrayTransform\Rule\NotNullRule;
 
 class TransformerTest extends TestCase
 {
@@ -99,7 +100,13 @@ class TransformerTest extends TestCase
                     'key_default',
                     'other_key_default'
                 ),
-                $valueMappingRule
+                $valueMappingRule,
+                new NotNullRule(
+                    new SimpleRule('one', 'two'),
+                    false,
+                    true
+                ),
+                new SimpleRule('three', 'four'),
             ]);
 
         $given = [
@@ -113,6 +120,7 @@ class TransformerTest extends TestCase
             'not_nested' => 2.0,
             'other_key' => 'key_default',
             'bar' => 'fdsa',
+            'four' => null,
         ];
 
         $this->assertSame($expected, $this->transformer->transform($given));

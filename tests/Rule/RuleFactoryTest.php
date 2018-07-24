@@ -20,6 +20,7 @@ use ArrayTransform\Rule\SimpleRule;
 use ArrayTransform\Rule\SimpleFormulaRule;
 use ArrayTransform\Rule\ValueMappingRule;
 use ArrayTransform\Rule\DefaultsRule;
+use ArrayTransform\Rule\NotNullRule;
 
 class RuleFactoryTest extends TestCase
 {
@@ -399,5 +400,85 @@ class RuleFactoryTest extends TestCase
         $rule = $this->factory->createRule($directKey, $config);
 
         $this->assertInstanceOf(SimpleFormulaRule::class, $rule);
+    }
+
+    /**
+     * @test
+     * @dataProvider getNotNullTestData
+     */
+    public function itCreatesNotNullRuleWhenNotNullIsDefinedAtLeastForOneKey(
+        string $directKey,
+        array $config,
+        bool $notRuleType = false
+    ) {
+        $rule = $this->factory->createRule($directKey, $config);
+
+        if ($notRuleType) {
+            $this->assertNotInstanceOf(NotNullRule::class, $rule);
+        } else {
+            $this->assertInstanceOf(NotNullRule::class, $rule);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getNotNullTestData(): array
+    {
+        return [
+            'direct not-null defined' => [
+                'foo',
+                [
+                    'inverse' => 'bar',
+                    'not_null' => [
+                        'direct' => true,
+                    ],
+                ],
+            ],
+            'inverse not-null config defined' => [
+                'foo',
+                [
+                    'inverse' => 'bar',
+                    'not_null' => [
+                        'inverse' => true,
+                    ],
+                ],
+            ],
+            'both not-null configs defined' => [
+                'foo',
+                [
+                    'inverse' => 'bar',
+                    'not_null' => [
+                        'direct' => true,
+                        'inverse' => false,
+                    ],
+                ],
+            ],
+            'both not-null configs defined 2' => [
+                'foo',
+                [
+                    'inverse' => 'bar',
+                    'not_null' => [
+                        'direct' => '1',
+                        'inverse' => '0',
+                    ],
+                ],
+            ],
+            'empty not-null config' => [
+                'foo',
+                [
+                    'inverse' => 'bar',
+                    'not_null' => [],
+                ],
+                true,
+            ],
+            'no not-null config' => [
+                'foo',
+                [
+                    'inverse' => 'bar',
+                ],
+                true,
+            ],
+        ];
     }
 }

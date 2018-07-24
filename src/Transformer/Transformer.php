@@ -13,6 +13,7 @@ namespace ArrayTransform\Transformer;
 use ArrayTransform\Mapping\MappingInterface;
 use ArrayTransform\Rule\RuleInterface;
 use ArrayTransform\Util\ArrayUtil;
+use ArrayTransform\Exception\NotNullableException;
 
 class Transformer implements TransformerInterface
 {
@@ -59,8 +60,12 @@ class Transformer implements TransformerInterface
 
         /** @var RuleInterface $rule */
         foreach ($rules as $rule) {
-            if (!empty($rule->getTargetKey())) {
-                $result[$rule->getTargetKey()] = $rule->resolveValue($data);
+            try {
+                if (!empty($rule->getTargetKey())) {
+                    $result[$rule->getTargetKey()] = $rule->resolveValue($data);
+                }
+            } catch (NotNullableException $e) {
+                /* ignored */
             }
         }
 

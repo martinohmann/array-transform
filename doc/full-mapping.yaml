@@ -82,3 +82,14 @@ mapping:
           inverse: 1.7
         - direct: B+
           inverse: 2.0
+
+  # mapping that defines keys as not nullable
+  some_key:
+    # inverse defines the target key to map the direct key ("some_key") to
+    inverse: some.key
+
+    # if set to true, the target key will be non-existent if its value would be
+    # null
+    not_null:
+      direct: false
+      inverse: true
