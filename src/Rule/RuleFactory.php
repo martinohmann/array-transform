@@ -135,8 +135,8 @@ class RuleFactory implements RuleFactoryInterface
      */
     private function createNotNullRule(RuleInterface $rule, array $config): RuleInterface
     {
-        $sourceNotNull = isset($config['direct']) ? (bool) $config['direct'] : false;
-        $targetNotNull = isset($config['inverse']) ? (bool) $config['inverse'] : false;
+        $targetNotNull = isset($config['direct']) ? (bool) $config['direct'] : false;
+        $sourceNotNull = isset($config['inverse']) ? (bool) $config['inverse'] : false;
 
         return new NotNullRule($rule, $sourceNotNull, $targetNotNull);
     }
