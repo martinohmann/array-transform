@@ -10,8 +10,8 @@
 
 namespace ArrayTransform\Tests\Util;
 
-use PHPUnit\Framework\TestCase;
 use ArrayTransform\Util\ArrayUtil;
+use PHPUnit\Framework\TestCase;
 
 class ArrayUtilTest extends TestCase
 {

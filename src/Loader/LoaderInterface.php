@@ -16,8 +16,8 @@ interface LoaderInterface
 {
     /**
      * @param string $fileName
-     * @return array
      * @throws ParseException
+     * @return array
      */
     public function load(string $fileName): array;
 }

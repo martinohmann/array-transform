@@ -18,19 +18,19 @@ class TypeRule implements RuleInterface
     private $rule;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $sourceType;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $targetType;
 
     /**
      * @param RuleInterface $rule
-     * @param string|null $sourceType
-     * @param string|null $targetType
+     * @param null|string $sourceType
+     * @param null|string $targetType
      */
     public function __construct(RuleInterface $rule, ?string $sourceType, ?string $targetType)
     {

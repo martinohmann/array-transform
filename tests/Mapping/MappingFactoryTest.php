@@ -10,9 +10,9 @@
 
 namespace ArrayTransform\Tests\Mapping;
 
-use PHPUnit\Framework\TestCase;
-use ArrayTransform\Mapping\MappingFactory;
 use ArrayTransform\Exception\MappingException;
+use ArrayTransform\Mapping\MappingFactory;
+use PHPUnit\Framework\TestCase;
 
 class MappingFactoryTest extends TestCase
 {

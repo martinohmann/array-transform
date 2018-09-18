@@ -10,11 +10,11 @@
 
 namespace ArrayTransform\Tests\Rule;
 
-use PHPUnit\Framework\TestCase;
-use Phake;
 use ArrayTransform\Rule\RuleInterface;
-use ArrayTransform\Rule\ValueMappingRule;
 use ArrayTransform\Rule\SimpleRule;
+use ArrayTransform\Rule\ValueMappingRule;
+use Phake;
+use PHPUnit\Framework\TestCase;
 
 class ValueMappingRuleTest extends TestCase
 {
@@ -31,6 +31,8 @@ class ValueMappingRuleTest extends TestCase
     /**
      * @test
      * @dataProvider getValueMappingTestData
+     * @param mixed $sourceValue
+     * @param mixed $targetValue
      */
     public function itMapsValues($sourceValue, $targetValue)
     {
@@ -60,6 +62,9 @@ class ValueMappingRuleTest extends TestCase
     /**
      * @test
      * @dataProvider getDefaultProviderTestData
+     * @param mixed $provider
+     * @param mixed $sourceValue
+     * @param mixed $targetValue
      */
     public function itHonorsProviderToObtainDefaultValue($provider, $sourceValue, $targetValue)
     {

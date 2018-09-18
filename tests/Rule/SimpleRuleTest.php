@@ -10,9 +10,9 @@
 
 namespace ArrayTransform\Tests\Rule;
 
-use PHPUnit\Framework\TestCase;
-use ArrayTransform\Rule\SimpleRule;
 use ArrayTransform\Rule\RuleInterface;
+use ArrayTransform\Rule\SimpleRule;
+use PHPUnit\Framework\TestCase;
 
 class SimpleRuleTest extends TestCase
 {
@@ -42,6 +42,7 @@ class SimpleRuleTest extends TestCase
     /**
      * @test
      * @dataProvider getTestData
+     * @param mixed $expected
      */
     public function itResolvesValuesFromArray(string $sourceKey, string $targetKey, array $data, $expected)
     {

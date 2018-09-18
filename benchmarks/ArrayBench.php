@@ -10,10 +10,10 @@
 
 namespace ArrayTransform\Benchmarks;
 
-use PhpBench\Benchmark\Metadata\Annotations\Revs;
+use ArrayTransform\Util\ArrayUtil;
 use PhpBench\Benchmark\Metadata\Annotations\Iterations;
 use PhpBench\Benchmark\Metadata\Annotations\ParamProviders;
-use ArrayTransform\Util\ArrayUtil;
+use PhpBench\Benchmark\Metadata\Annotations\Revs;
 
 class ArrayBench
 {

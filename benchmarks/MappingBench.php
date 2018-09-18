@@ -10,11 +10,11 @@
 
 namespace ArrayTransform\Benchmarks;
 
-use PhpBench\Benchmark\Metadata\Annotations\Revs;
-use PhpBench\Benchmark\Metadata\Annotations\Iterations;
 use ArrayTransform\Mapping\MappingFactory;
-use PhpBench\Benchmark\Metadata\Annotations\ParamProviders;
 use PhpBench\Benchmark\Metadata\Annotations\BeforeClassMethods;
+use PhpBench\Benchmark\Metadata\Annotations\Iterations;
+use PhpBench\Benchmark\Metadata\Annotations\ParamProviders;
+use PhpBench\Benchmark\Metadata\Annotations\Revs;
 
 /**
  * @BeforeMethods({"init"})

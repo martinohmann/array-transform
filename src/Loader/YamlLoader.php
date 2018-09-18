@@ -10,8 +10,8 @@
 
 namespace ArrayTransform\Loader;
 
-use Symfony\Component\Yaml\Yaml;
 use ArrayTransform\Exception\ParseException;
+use Symfony\Component\Yaml\Yaml;
 
 class YamlLoader implements LoaderInterface
 {

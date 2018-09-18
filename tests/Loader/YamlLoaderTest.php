@@ -10,9 +10,9 @@
 
 namespace ArrayTransform\Tests\Loader;
 
-use PHPUnit\Framework\TestCase;
-use ArrayTransform\Loader\YamlLoader;
 use ArrayTransform\Exception\ParseException;
+use ArrayTransform\Loader\YamlLoader;
+use PHPUnit\Framework\TestCase;
 
 class YamlLoaderTest extends TestCase
 {

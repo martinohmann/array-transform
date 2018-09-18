@@ -10,10 +10,10 @@
 
 namespace ArrayTransform\Tests\Mapping;
 
-use PHPUnit\Framework\TestCase;
-use Phake;
 use ArrayTransform\Mapping\Mapping;
 use ArrayTransform\Rule\RuleInterface;
+use Phake;
+use PHPUnit\Framework\TestCase;
 
 class MappingTest extends TestCase
 {

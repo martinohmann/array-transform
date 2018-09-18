@@ -18,19 +18,19 @@ class SimpleFormulaRule implements RuleInterface
     private $rule;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $sourceFormula;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $targetFormula;
 
     /**
      * @param RuleInterface $rule
-     * @param string|null $sourceFormula
-     * @param string|null $targetFormula
+     * @param null|string $sourceFormula
+     * @param null|string $targetFormula
      */
     public function __construct(RuleInterface $rule, ?string $sourceFormula, ?string $targetFormula)
     {

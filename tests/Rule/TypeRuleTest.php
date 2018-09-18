@@ -10,11 +10,11 @@
 
 namespace ArrayTransform\Tests\Rule;
 
-use PHPUnit\Framework\TestCase;
-use Phake;
-use ArrayTransform\Rule\SimpleRule;
 use ArrayTransform\Rule\RuleInterface;
+use ArrayTransform\Rule\SimpleRule;
 use ArrayTransform\Rule\TypeRule;
+use Phake;
+use PHPUnit\Framework\TestCase;
 
 class TypeRuleTest extends TestCase
 {

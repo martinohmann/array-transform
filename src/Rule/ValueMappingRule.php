@@ -101,13 +101,15 @@ class ValueMappingRule implements RuleInterface
      */
     private function mapValue($value)
     {
-        $pos = \array_search($value, $this->sourceValues);
+        $pos = \array_search($value, $this->sourceValues, true);
 
         if (false !== $pos) {
             return $this->targetValues[$pos];
-        } elseif ($this->defaultProvider == 'pass_through') {
+        }
+        if ('pass_through' == $this->defaultProvider) {
             return $value;
-        } elseif (\is_callable($this->defaultProvider)) {
+        }
+        if (\is_callable($this->defaultProvider)) {
             return \call_user_func($this->defaultProvider, $value);
         }
 

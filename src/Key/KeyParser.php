@@ -41,7 +41,7 @@ class KeyParser
     public function parseKey(string $key): TypedKey
     {
         if (\preg_match(self::TYPED_KEY_PATTERN, $key, $matches)) {
-            if (!\in_array($matches['type'], self::VALID_TYPES)) {
+            if (!\in_array($matches['type'], self::VALID_TYPES, true)) {
                 throw new ParseException(
                     \sprintf(
                         '"%s" is not a valid type, allowed types: "%s"',

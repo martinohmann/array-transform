@@ -18,13 +18,13 @@ class TypedKey
     private $name;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $type;
 
     /**
      * @param string $name
-     * @param string|null $type
+     * @param null|string $type
      */
     public function __construct(string $name, ?string $type = null)
     {
@@ -41,7 +41,7 @@ class TypedKey
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getType(): ?string
     {

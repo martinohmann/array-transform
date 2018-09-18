@@ -10,10 +10,10 @@
 
 namespace ArrayTransform\Transformer;
 
+use ArrayTransform\Exception\NotNullableException;
 use ArrayTransform\Mapping\MappingInterface;
 use ArrayTransform\Rule\RuleInterface;
 use ArrayTransform\Util\ArrayUtil;
-use ArrayTransform\Exception\NotNullableException;
 
 class Transformer implements TransformerInterface
 {
@@ -65,7 +65,7 @@ class Transformer implements TransformerInterface
                     $result[$rule->getTargetKey()] = $rule->resolveValue($data);
                 }
             } catch (NotNullableException $e) {
-                /* ignored */
+                // ignored
             }
         }
 

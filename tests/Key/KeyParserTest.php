@@ -10,9 +10,9 @@
 
 namespace ArrayTransform\Tests\Key;
 
-use PHPUnit\Framework\TestCase;
-use ArrayTransform\Key\KeyParser;
 use ArrayTransform\Exception\ParseException;
+use ArrayTransform\Key\KeyParser;
+use PHPUnit\Framework\TestCase;
 
 class KeyParserTest extends TestCase
 {

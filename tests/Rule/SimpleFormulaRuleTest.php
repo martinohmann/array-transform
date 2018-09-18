@@ -10,11 +10,11 @@
 
 namespace ArrayTransform\Tests\Rule;
 
-use PHPUnit\Framework\TestCase;
-use Phake;
-use ArrayTransform\Rule\SimpleFormulaRule;
 use ArrayTransform\Rule\RuleInterface;
+use ArrayTransform\Rule\SimpleFormulaRule;
 use ArrayTransform\Rule\SimpleRule;
+use Phake;
+use PHPUnit\Framework\TestCase;
 
 class SimpleFormulaRuleTest extends TestCase
 {
@@ -60,6 +60,7 @@ class SimpleFormulaRuleTest extends TestCase
     /**
      * @test
      * @dataProvider getTestData
+     * @param mixed $expected
      */
     public function itEvaluatesFormulas(array $data, ?string $targetFormula, $expected)
     {

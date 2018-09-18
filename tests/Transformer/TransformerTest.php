@@ -10,16 +10,16 @@
 
 namespace ArrayTransform\Tests\Transformer;
 
-use PHPUnit\Framework\TestCase;
-use Phake;
-use ArrayTransform\Transformer\Transformer;
 use ArrayTransform\Mapping\MappingInterface;
+use ArrayTransform\Rule\DefaultsRule;
+use ArrayTransform\Rule\NotNullRule;
+use ArrayTransform\Rule\SimpleFormulaRule;
 use ArrayTransform\Rule\SimpleRule;
 use ArrayTransform\Rule\TypeRule;
-use ArrayTransform\Rule\SimpleFormulaRule;
-use ArrayTransform\Rule\DefaultsRule;
 use ArrayTransform\Rule\ValueMappingRule;
-use ArrayTransform\Rule\NotNullRule;
+use ArrayTransform\Transformer\Transformer;
+use Phake;
+use PHPUnit\Framework\TestCase;
 
 class TransformerTest extends TestCase
 {

@@ -1,13 +1,21 @@
 <?php
+/*
+ * This file is part of the array-transform package.
+ *
+ * (c) Martin Ohmann <martin@mohmann.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace ArrayTransform\Tests\Rule;
 
-use PHPUnit\Framework\TestCase;
 use \Phake;
-use ArrayTransform\Rule\RuleInterface;
-use ArrayTransform\Rule\NotNullRule;
 use ArrayTransform\Exception\NotNullableException;
+use ArrayTransform\Rule\NotNullRule;
+use ArrayTransform\Rule\RuleInterface;
 use ArrayTransform\Rule\SimpleRule;
+use PHPUnit\Framework\TestCase;
 
 class NotNullRuleTest extends TestCase
 {
@@ -24,6 +32,7 @@ class NotNullRuleTest extends TestCase
     /**
      * @test
      * @dataProvider providerTestData
+     * @param mixed $givenValue
      */
     public function itHandlesNullableFields($givenValue, bool $targetNotNull, bool $expectException)
     {

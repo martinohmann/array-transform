@@ -10,11 +10,11 @@
 
 namespace ArrayTransform\Mapping;
 
-use ArrayTransform\Rule\RuleFactoryInterface;
-use ArrayTransform\Rule\RuleFactory;
 use ArrayTransform\Exception\MappingException;
 use ArrayTransform\Loader\LoaderInterface;
 use ArrayTransform\Loader\YamlLoader;
+use ArrayTransform\Rule\RuleFactory;
+use ArrayTransform\Rule\RuleFactoryInterface;
 
 class MappingFactory implements MappingFactoryInterface
 {
@@ -75,7 +75,7 @@ class MappingFactory implements MappingFactoryInterface
                 );
             }
 
-            if ($key == '_global') {
+            if ('_global' == $key) {
                 $this->processGlobalConfig($mapping, $keyConfig);
             } else {
                 $this->processRuleConfig($mapping, $key, $keyConfig);

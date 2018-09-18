@@ -10,8 +10,8 @@
 
 namespace ArrayTransform\Mapping;
 
-use ArrayTransform\Rule\RuleInterface;
 use ArrayTransform\Exception\NotReversibleException;
+use ArrayTransform\Rule\RuleInterface;
 
 class Mapping implements MappingInterface
 {
@@ -59,7 +59,7 @@ class Mapping implements MappingInterface
                 try {
                     $this->reverseRules[] = $rule->reverse();
                 } catch (NotReversibleException $e) {
-                    /* ignored */
+                    // ignored
                 }
             }
         }

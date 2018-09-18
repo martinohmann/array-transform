@@ -10,11 +10,11 @@
 
 namespace ArrayTransform\Tests\Rule;
 
-use PHPUnit\Framework\TestCase;
-use Phake;
-use ArrayTransform\Rule\SimpleRule;
-use ArrayTransform\Rule\RuleInterface;
 use ArrayTransform\Rule\DefaultsRule;
+use ArrayTransform\Rule\RuleInterface;
+use ArrayTransform\Rule\SimpleRule;
+use Phake;
+use PHPUnit\Framework\TestCase;
 
 class DefaultsRuleTest extends TestCase
 {
@@ -31,6 +31,8 @@ class DefaultsRuleTest extends TestCase
     /**
      * @test
      * @dataProvider provideDefaultsTestData
+     * @param mixed $sourceDefault
+     * @param mixed $targetDefault
      */
     public function itReturnsDefaultsIfSourceKeyIsNotPresent($sourceDefault, $targetDefault)
     {
@@ -45,6 +47,8 @@ class DefaultsRuleTest extends TestCase
     /**
      * @test
      * @dataProvider provideDefaultsTestData
+     * @param mixed $sourceDefault
+     * @param mixed $targetDefault
      */
     public function isIsReversible($sourceDefault, $targetDefault)
     {

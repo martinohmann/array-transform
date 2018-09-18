@@ -17,17 +17,17 @@ interface MappingFactoryInterface
 {
     /**
      * @param array $config
-     * @return MappingInterface
      * @throws MappingException
      * @throws ParseException
+     * @return MappingInterface
      */
     public function createMapping(array $config): MappingInterface;
 
     /**
      * @param string $fileName
-     * @return MappingInterface
      * @throws MappingException
      * @throws ParseException
+     * @return MappingInterface
      */
     public function createMappingFromFile(string $fileName): MappingInterface;
 }

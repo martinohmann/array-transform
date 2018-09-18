@@ -17,8 +17,8 @@ interface RuleInterface
 {
     /**
      * @param array $data
-     * @return mixed
      * @throws NotNullableException
+     * @return mixed
      */
     public function resolveValue(array $data);
 
@@ -33,8 +33,8 @@ interface RuleInterface
     public function getTargetKey(): string;
 
     /**
-     * @return RuleInterface
      * @throws NotReversibleException
+     * @return RuleInterface
      */
     public function reverse(): RuleInterface;
 }

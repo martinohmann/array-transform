@@ -10,17 +10,17 @@
 
 namespace ArrayTransform\Tests\Rule;
 
-use PHPUnit\Framework\TestCase;
-use ArrayTransform\Rule\RuleFactory;
 use ArrayTransform\Exception\MappingException;
-use ArrayTransform\Rule\TypeRule;
 use ArrayTransform\Key\KeyParser;
-use ArrayTransform\Rule\RuleInterface;
-use ArrayTransform\Rule\SimpleRule;
-use ArrayTransform\Rule\SimpleFormulaRule;
-use ArrayTransform\Rule\ValueMappingRule;
 use ArrayTransform\Rule\DefaultsRule;
 use ArrayTransform\Rule\NotNullRule;
+use ArrayTransform\Rule\RuleFactory;
+use ArrayTransform\Rule\RuleInterface;
+use ArrayTransform\Rule\SimpleFormulaRule;
+use ArrayTransform\Rule\SimpleRule;
+use ArrayTransform\Rule\TypeRule;
+use ArrayTransform\Rule\ValueMappingRule;
+use PHPUnit\Framework\TestCase;
 
 class RuleFactoryTest extends TestCase
 {

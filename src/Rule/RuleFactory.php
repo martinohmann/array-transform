@@ -32,8 +32,8 @@ class RuleFactory implements RuleFactoryInterface
     /**
      * @param string $directKey
      * @param array $config
-     * @return RuleInterface
      * @throws MappingException
+     * @return RuleInterface
      */
     public function createRule(string $directKey, array $config): RuleInterface
     {
